@@ -1,4 +1,4 @@
-# Team Members:
+Team Members:
 Brian Cao
 Jesse Park
 Michelle Lytle 
