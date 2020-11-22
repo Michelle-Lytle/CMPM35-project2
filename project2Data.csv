@@ -1,42 +1,43 @@
-date,position,thoughts
-Tuesday,curled up,"""I wish I was still sleeping."""
-Tuesday,under blanket,"""She looks very silly and happy! :) """
-Tuesday,sprawled out,"""She found a sunny spot!"" "
-Tuesday,on side,"""She looks happy."" "
-Tuesday,loaf,"""What is she looking at outside?"" "
-Wendesday,under blanket,"happy; ""Looks very cozy!"""
-Wendesday,on side,"relief; ""There she is!"" "
-Wendesday,sprawled out,"""Is she dreaming?"""
-Wendesday,curled up,happy; cozy 
-Wendesday,loaf,"""Looks like she'll get up soon."""
-Wendesday,curled up,happy; love and appreciation 
-Thursday,curled up,"surprised; ""She's on the chair!"""
-Thursday,curled up,"""Looks very cute! :) "" "
-Thursday,curled up,"""She's in my room!"" "
-Thursday,flopped,"""Does she want to play?"" "
-Thursday,on side,"""Cute!"" "
-Thursday,on side,"""She's ready to go to bed."""
-Friday,curled up,"""Looks cozy and warm."""
-Friday,loaf,"""She looks sleepy."""
-Friday,loaf,"""What's she looking at?"" "
-Friday,sprawled out,"""It looks like she wants to play."""
-Friday,on side,happy; cozy 
-Friday,curled up,"happy; ""She wants to be in my room!"""
-Saturday,curled up,"surprised; ""She's on my chair!"" "
-Saturday,curled up,happy; grateful 
-Saturday,sprawled out,"""Why are her claws out??"""
-Saturday,curled up,"""Is she cold?"" "
-Saturday,on side,"""She looks happy!"" "
-Saturday,loaf,"""Is she watching the tv?"" "
-Saturday,flopped,"""It looks like she wants attention."" "
-Sunday,curled up,happy; warm 
-Sunday,sprawled out,"""Looks fast asleep."" "
-Sunday,curled up,"""Is she having a bad dream?"""
-Sunday,on side,"""Looks very sleepy."" "
-Sunday,loaf,"""Does she see something outside?"""
-Monday,curled up,"""She's going to school with me!"" "
-Monday,curled up,"""Looks cozy."" "
-Monday,on side,"""She seems tired."" "
-Monday,flopped,"""She probably wants attention."" "
-Monday,on side,happy; love 
-Monday,curled up,"""Will she go to sleep in my room later tonight?"" "
+day,position,frequency
+tuesday,curled up,1
+tuesday,under blanket,1
+tuesday,sprawled out,1
+tuesday,on side,1
+tuesday,loaf,1
+tuesday,flopped,0
+wednesday,curled up,2
+wednesday,under blanket,1
+wednesday,sprawled out,1
+wednesday,on side,1
+wednesday,loaf,1
+wednesday,flopped,0
+thursday,curled up,3
+thursday,under blanket,0
+thursday,sprawled out,0
+thursday,on side,2
+thursday,loaf,0
+thursday,flopped,1
+friday,curled up,2
+friday,under blanket,0
+friday,sprawled out,1
+friday,on side,1
+friday,loaf,2
+friday,flopped,0
+saturday,curled up,3
+saturday,under blanket,0
+saturday,sprawled out,1
+saturday,on side,1
+saturday,loaf,1
+saturday,flopped,1
+sunday,curled up,2
+sunday,under blanket,0
+sunday,sprawled out,1
+sunday,on side,1
+sunday,loaf,1
+sunday,flopped,0
+monday,curled up,3
+monday,under blanket,0
+monday,sprawled out,0
+monday,on side,2
+monday,loaf,0
+monday,flopped,1
