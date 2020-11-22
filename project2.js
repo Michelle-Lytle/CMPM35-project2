@@ -17,16 +17,17 @@ function init(data) {
   let positions = [pos1, pos2, pos3, pos4, pos5, pos6];
 
 
-
   // defines range of x values
   let x = d3.scaleBand()
+      // domain of x is the number of positons
       .domain(d3.range(positions.length))
       .range([margin.left, width - margin.right])
       .padding(0.1);
 
   // defines range of y values
   let y = d3.scaleLinear()
-    .domain([0, pos1.length]).nice()
+    // domain of y is the position with the greatest frequency
+    .domain([0, Math.max(pos1.length, pos2.length, pos3.length, pos4.length, pos5.length, pos6.length)]).nice()
     .range([height - margin.bottom, margin.top]);
 
 
@@ -60,9 +61,10 @@ function init(data) {
     .data(data)
     .join("rect")
       .attr("x", (d, i) => x(i))
-      .attr("y", d => y(0))
-      .attr("height", d => y(0) - y(10))
+      .attr("y", d => y(pos1.length))
+      .attr("height", d => y(0) - y(pos1.length))
       .attr("width", x.bandwidth());
+
 
   svg.append("g")
       .call(xAxis);
