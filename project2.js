@@ -1,40 +1,41 @@
 function init(data) {
 
-  // filters for position 
-  let pos1 = data.filter ( d => { return d.position == "curled up"; } );
+  // filters for day 
+  let tues = data.filter ( d => { return d.day == "tuesday"; } );
 
-  let pos2 = data.filter ( d => { return d.position == "under blanket"; } );
+  let wed = data.filter ( d => { return d.day == "wednesday"; } );
 
-  let pos3 = data.filter ( d => { return d.position == "sprawled out"; } );
+  let thurs = data.filter ( d => { return d.day == "thursday"; } );
 
-  let pos4 = data.filter ( d => { return d.position == "on side"; } );
+  let fri = data.filter ( d => { return d.day == "friday"; } );
 
-  let pos5 = data.filter ( d => { return d.position == "loaf"; } );
+  let sat = data.filter ( d => { return d.day == "saturday"; } );
 
-  let pos6 = data.filter ( d => { return d.position == "flopped"; } );
+  let sun = data.filter ( d => { return d.day == "sunday"; } );
 
-  // array of datasets filtered by position data point 
-  let positions = [pos1, pos2, pos3, pos4, pos5, pos6];
+  let mon = data.filter ( d => { return d.day == "monday"; } );
 
+  // array of datasets filtered by day 
+  let days = [tues, wed, thurs, fri, sat, sun, mon];
 
   // defines range of x values
   let x = d3.scaleBand()
       // domain of x is the number of positons
-      .domain(d3.range(positions.length))
+      .domain(d3.range(6))
       .range([margin.left, width - margin.right])
       .padding(0.1);
 
   // defines range of y values
   let y = d3.scaleLinear()
     // domain of y is the position with the greatest frequency
-    .domain([0, Math.max(pos1.length, pos2.length, pos3.length, pos4.length, pos5.length, pos6.length)]).nice()
+    .domain([0, 3]).nice()
     .range([height - margin.bottom, margin.top]);
 
 
   // labels x axis 
   let xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom})`)
-    .call(d3.axisBottom(x).tickFormat(i => data[i].position).tickSizeOuter(0)); 
+    .call(d3.axisBottom(x).tickFormat(i => tues[i].position).tickSizeOuter(0)); 
 
   // labels y axis 
   let yAxis = g => g
@@ -58,11 +59,11 @@ function init(data) {
   svg.append("g")
       .attr("fill", color)
     .selectAll("rect")
-    .data(data)
+    .data(tues)
     .join("rect")
       .attr("x", (d, i) => x(i))
-      .attr("y", d => y(pos1.length))
-      .attr("height", d => y(0) - y(pos1.length))
+      .attr("y", d => y(d.frequency))
+      .attr("height", d => y(0) - y(d.frequency))
       .attr("width", x.bandwidth());
 
 
