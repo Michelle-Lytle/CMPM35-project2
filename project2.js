@@ -15,10 +15,14 @@ function init(data) {
 
   let mon = data.filter ( d => { return d.day == "monday"; } );
 
-  // array of datasets filtered by day 
-  let days = [tues, wed, thurs, fri, sat, sun, mon];
+  let week = data.filter ( d => { return d.day == "total"; } );
 
-  // defines range of x values
+  makeGraph(week); 
+  
+}
+
+function makeGraph(day) {
+// defines range of x values
   let x = d3.scaleBand()
       // domain of x is the number of positons
       .domain(d3.range(6))
@@ -27,27 +31,27 @@ function init(data) {
 
   // defines range of y values
   let y = d3.scaleLinear()
-    // domain of y is the position with the greatest frequency
-    .domain([0, 3]).nice()
+    // domain of y is the greatest frequency 
+    .domain([0, d3.max(day, d => d.frequency)]).nice()
     .range([height - margin.bottom, margin.top]);
 
 
   // labels x axis 
   let xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom})`)
-    .call(d3.axisBottom(x).tickFormat(i => tues[i].position).tickSizeOuter(0)); 
+    .call(d3.axisBottom(x).tickFormat(i => day[i].position).tickSizeOuter(0)); 
 
   // labels y axis 
   let yAxis = g => g
     .attr("transform", `translate(${margin.left},0)`)
-    .call(d3.axisLeft(y).ticks(null, data.format))
+    .call(d3.axisLeft(y).ticks(null, day.format))
     .call(g => g.select(".domain").remove())
     .call(g => g.append("text")
         .attr("x", -margin.left)
         .attr("y", 10)
         .attr("fill", "currentColor")
         .attr("text-anchor", "start")
-        .text(data.y));
+        .text(day.y));
 
 
   // draws graph
@@ -59,7 +63,7 @@ function init(data) {
   svg.append("g")
       .attr("fill", color)
     .selectAll("rect")
-    .data(tues)
+    .data(day)
     .join("rect")
       .attr("x", (d, i) => x(i))
       .attr("y", d => y(d.frequency))
@@ -77,6 +81,7 @@ function init(data) {
 }
 
 
+// assignments for making graph 
 let color = "steelblue";
 
 let width = 500; 
