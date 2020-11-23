@@ -16,7 +16,43 @@ function init(data) {
   let mon = data.filter ( d => { return d.day == "monday"; } );
 
   let week = data.filter ( d => { return d.day == "total"; } );
+  
 
+  makeGraph(week);
+
+// changes graph when a button is clicked 
+  d3.select("#total")
+    .on("click", function(d, i) {
+    makeGraph(week);
+  })
+  d3.select("#mon")
+    .on("click", function(d, i) {
+    makeGraph(mon);
+  })
+  d3.select("#tues")
+    .on("click", function(d, i) {
+    makeGraph(tues);
+  })
+  d3.select("#wed")
+    .on("click", function(d, i) {
+    makeGraph(wed);
+  })
+  d3.select("#thurs")
+    .on("click", function(d, i) {
+    makeGraph(thurs);
+  })
+  d3.select("#fri")
+    .on("click", function(d, i) {
+    makeGraph(fri);
+  })
+    d3.select("#sat")
+    .on("click", function(d, i) {
+    makeGraph(sat);
+  })
+  d3.select("#sun")
+    .on("click", function(d, i) {
+    makeGraph(sun);
+  })
 }
 
 
