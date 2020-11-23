@@ -28,40 +28,48 @@ function init(data) {
   d3.select("#total")
     .on("click", function(d, i) {
     color = "#4E8BE5";
+    graph_text = "Whole Week";
     makeGraph(week);
   })
   d3.select("#mon")
     .on("click", function(d, i) {
     color = "#C14DC8";
+    graph_text = "Monday";
     makeGraph(mon);
   })
   d3.select("#tues")
     .on("click", function(d, i) {
     color = "#4E8BE5";
+    graph_text = "Tuesday";
     makeGraph(tues);
   })
   d3.select("#wed")
     .on("click", function(d, i) {
     color = "#4EE5A4";
+    graph_text = "Wednesday";
     makeGraph(wed);
   })
   d3.select("#thurs")
     .on("click", function(d, i) {
+    graph_text = "Thursday";
     color = "#C14DC8";
     makeGraph(thurs);
   })
   d3.select("#fri")
     .on("click", function(d, i) {
+    graph_text = "Friday";
     color = "#4E8BE5";
     makeGraph(fri);
   })
     d3.select("#sat")
     .on("click", function(d, i) {
+    graph_text = "Saturday";
     color = "#4EE5A4";
     makeGraph(sat);
   })
   d3.select("#sun")
     .on("click", function(d, i) {
+    graph_text = "Sunday";
     color = "#C14DC8";
     makeGraph(sun);
   })
@@ -109,7 +117,7 @@ function makeGraph(day) {
    .append("svg")
    .attr("width", width)
    .attr("height", height);
-   
+
   // height of bars represents frequency  
   svg.append("g")
       .attr("fill", color)
@@ -128,6 +136,17 @@ function makeGraph(day) {
   svg.append("g")
       .call(yAxis);
 
+  // graph label 
+  const title = svg.append("text")
+  .attr("x", 260)
+  .attr("y", 550)
+  .attr("text-anchor","middle")
+  .attr("font-family", "sans-serif")
+  .attr("font-size", "18px")
+  .attr("fill", "black")
+  .text(graph_text);
+    
+
   return svg.node();
 }
 
@@ -135,8 +154,10 @@ function makeGraph(day) {
 // assignments for making graph 
 let color = "#4E8BE5";
 
+let graph_text = "Whole Week";
+
 let width = 500; 
 
-let height = 500; 
+let height = 600; 
 
-let margin = ({top: 30, right: 0, bottom: 30, left: 40});
+let margin = ({top: 30, right: 0, bottom: 100, left: 40});
