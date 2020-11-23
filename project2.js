@@ -17,7 +17,10 @@ function init(data) {
 
   let week = data.filter ( d => { return d.day == "total"; } );
 
-  makeGraph(week); 
+
+
+  // day should change based on input
+  makeGraph(sun); 
   
 }
 
@@ -32,7 +35,7 @@ function makeGraph(day) {
   // defines range of y values
   let y = d3.scaleLinear()
     // domain of y is the greatest frequency 
-    .domain([0, d3.max(day, d => d.frequency)]).nice()
+    .domain([0, d3.max(day, d => d.frequency) * 2]).nice()
     .range([height - margin.bottom, margin.top]);
 
 
