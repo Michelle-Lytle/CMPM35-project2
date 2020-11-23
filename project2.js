@@ -17,12 +17,9 @@ function init(data) {
 
   let week = data.filter ( d => { return d.day == "total"; } );
 
-
-
-  // day should change based on input
-  makeGraph(sun); 
-  
 }
+
+
 
 function makeGraph(day) {
 // defines range of x values
