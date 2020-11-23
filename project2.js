@@ -1,64 +1,78 @@
+/*
+
+Our graph represents how many times Michelle's cat was laying 
+in a certain position over a period of time. The graph can
+change between displaying data for the whole week or for a 
+specific day by pressing the buttons at the top. 
+
+Our code is based on the bar chart example from D3. 
+<https://observablehq.com/@d3/bar-chart>
+
+*/
+
 function init(data) {
-
-  // filters for day 
+  // filters data by day 
   let tues = data.filter ( d => { return d.day == "tuesday"; } );
-
   let wed = data.filter ( d => { return d.day == "wednesday"; } );
-
   let thurs = data.filter ( d => { return d.day == "thursday"; } );
-
   let fri = data.filter ( d => { return d.day == "friday"; } );
-
   let sat = data.filter ( d => { return d.day == "saturday"; } );
-
   let sun = data.filter ( d => { return d.day == "sunday"; } );
-
   let mon = data.filter ( d => { return d.day == "monday"; } );
-
   let week = data.filter ( d => { return d.day == "total"; } );
   
-
+  // initially draws graph based on the data for a week
   makeGraph(week);
 
-// changes graph when a button is clicked 
+  // changes graph when a button is clicked 
   d3.select("#total")
     .on("click", function(d, i) {
+    color = "#4E8BE5";
     makeGraph(week);
   })
   d3.select("#mon")
     .on("click", function(d, i) {
+    color = "#C14DC8";
     makeGraph(mon);
   })
   d3.select("#tues")
     .on("click", function(d, i) {
+    color = "#4E8BE5";
     makeGraph(tues);
   })
   d3.select("#wed")
     .on("click", function(d, i) {
+    color = "#4EE5A4";
     makeGraph(wed);
   })
   d3.select("#thurs")
     .on("click", function(d, i) {
+    color = "#C14DC8";
     makeGraph(thurs);
   })
   d3.select("#fri")
     .on("click", function(d, i) {
+    color = "#4E8BE5";
     makeGraph(fri);
   })
     d3.select("#sat")
     .on("click", function(d, i) {
+    color = "#4EE5A4";
     makeGraph(sat);
   })
   d3.select("#sun")
     .on("click", function(d, i) {
+    color = "#C14DC8";
     makeGraph(sun);
   })
 }
 
 
-
 function makeGraph(day) {
-// defines range of x values
+  // clears graph 
+  d3.selectAll('svg').remove();
+
+  // defines range of x values
   let x = d3.scaleBand()
       // domain of x is the number of positons
       .domain(d3.range(6))
@@ -68,7 +82,7 @@ function makeGraph(day) {
   // defines range of y values
   let y = d3.scaleLinear()
     // domain of y is the greatest frequency 
-    .domain([0, d3.max(day, d => d.frequency) * 2]).nice()
+    .domain([0, d3.max(day, d => d.frequency) * 2])
     .range([height - margin.bottom, margin.top]);
 
 
@@ -95,7 +109,8 @@ function makeGraph(day) {
    .append("svg")
    .attr("width", width)
    .attr("height", height);
-
+   
+  // height of bars represents frequency  
   svg.append("g")
       .attr("fill", color)
     .selectAll("rect")
@@ -118,7 +133,7 @@ function makeGraph(day) {
 
 
 // assignments for making graph 
-let color = "steelblue";
+let color = "#4E8BE5";
 
 let width = 500; 
 
