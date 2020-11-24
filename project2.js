@@ -126,9 +126,11 @@ function makeGraph(day) {
     .join("rect")
       .attr("x", (d, i) => x(i))
       .attr("y", d => y(d.frequency))
+      .attr("width", x.bandwidth())
       .attr("height", d => y(0) - y(d.frequency))
-      .attr("width", x.bandwidth());
 
+      .on('mouseover', onMouseOver)
+     .on('mouseout', onMouseOut);
 
   svg.append("g")
       .call(xAxis);
@@ -150,6 +152,17 @@ function makeGraph(day) {
   return svg.node();
 }
 
+function onMouseOver(d, i) {
+         d3.select(this).transition()
+               .duration('50')
+               .attr('opacity', '.85')
+}
+
+function onMouseOut(d, i) {
+            d3.select(this).transition()
+               .duration('50')
+               .attr('opacity', '1');
+}
 
 // assignments for making graph 
 let color = "#4E8BE5";
