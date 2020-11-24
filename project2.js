@@ -1,9 +1,13 @@
 /*
 
 Our graph represents how many times Michelle's cat was laying 
-in a certain position over a period of time. The graph can
-change between displaying data for the whole week or for a 
-specific day by pressing the buttons at the top. 
+in a certain position over a period of time. 
+
+The graph can change between displaying data for the whole week 
+or for a specific day by pressing the buttons at the top. 
+
+The height value of each bar can be viewed by hovering the 
+mouse over that bar. 
 
 Our code is based on the bar chart example from D3. 
 <https://observablehq.com/@d3/bar-chart>
@@ -27,51 +31,51 @@ function init(data) {
   // changes graph when a button is clicked 
   d3.select("#total")
     .on("click", function(d, i) {
-    color = "#4E8BE5";
-    graph_text = "Whole Week";
-    makeGraph(week);
-  })
-  d3.select("#mon")
-    .on("click", function(d, i) {
-    color = "#C14DC8";
-    graph_text = "Monday";
-    makeGraph(mon);
+      color = "#C14DC8";
+      graph_text = "Whole Week";
+      makeGraph(week);
   })
   d3.select("#tues")
     .on("click", function(d, i) {
-    color = "#4E8BE5";
-    graph_text = "Tuesday";
-    makeGraph(tues);
+      color = "#4E8BE5";
+      graph_text = "Tuesday";
+      makeGraph(tues);
   })
   d3.select("#wed")
     .on("click", function(d, i) {
-    color = "#4EE5A4";
-    graph_text = "Wednesday";
-    makeGraph(wed);
+      color = "#4EE5A4";
+      graph_text = "Wednesday";
+      makeGraph(wed);
   })
   d3.select("#thurs")
     .on("click", function(d, i) {
-    graph_text = "Thursday";
-    color = "#C14DC8";
-    makeGraph(thurs);
+      graph_text = "Thursday";
+      color = "#C14DC8";
+      makeGraph(thurs);
   })
   d3.select("#fri")
     .on("click", function(d, i) {
-    graph_text = "Friday";
-    color = "#4E8BE5";
-    makeGraph(fri);
+      graph_text = "Friday";
+      color = "#4E8BE5";
+      makeGraph(fri);
   })
     d3.select("#sat")
     .on("click", function(d, i) {
-    graph_text = "Saturday";
-    color = "#4EE5A4";
-    makeGraph(sat);
+      graph_text = "Saturday";
+      color = "#4EE5A4";
+      makeGraph(sat);
   })
   d3.select("#sun")
     .on("click", function(d, i) {
-    graph_text = "Sunday";
-    color = "#C14DC8";
-    makeGraph(sun);
+      graph_text = "Sunday";
+      color = "#C14DC8";
+      makeGraph(sun);
+  })
+  d3.select("#mon")
+    .on("click", function(d, i) {
+      color = "#4E8BE5";
+      graph_text = "Monday";
+      makeGraph(mon);
   })
 }
 
@@ -93,7 +97,6 @@ function makeGraph(day) {
     .domain([0, d3.max(day, d => d.frequency) * 2])
     .range([height - margin.bottom, margin.top]);
 
-
   // labels x axis 
   let xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom})`)
@@ -111,7 +114,6 @@ function makeGraph(day) {
         .attr("text-anchor", "start")
         .text(day.y));
 
-
   // draws graph
   let svg = d3.select("body")
    .append("svg")
@@ -120,18 +122,45 @@ function makeGraph(day) {
 
   // height of bars represents frequency  
   svg.append("g")
-      .attr("fill", color)
+    .attr("fill", color)
     .selectAll("rect")
     .data(day)
     .join("rect")
+      .attr("class", (d) => d.frequency)
       .attr("x", (d, i) => x(i))
       .attr("y", d => y(d.frequency))
       .attr("width", x.bandwidth())
       .attr("height", d => y(0) - y(d.frequency))
-      // bars can be interacted with through the mouse
-      .on('mouseover', onMouseOver)
-      .on('mouseout', onMouseOut);
 
+      // mouseover runs when mouse is over a bar
+      .on('mouseover', function(d, i) {
+        d3.select(this)
+        .transition()
+        .duration('125')
+        .attr('opacity', '.75');
+
+      // displays frequency for bars when the mouse is over a bar 
+      let tooltip = svg.append("text")
+        .attr("id", "tooltip")
+        .attr("x", d3.select(this).attr("x"))
+        .attr("y", d3.select(this).attr("y"))
+        .attr("text-anchor","right")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "18px")
+        .attr("fill", "black")
+        .text("Frequency: " + d3.select(this).attr("class"));
+        })
+
+      // mouseout runs when mouse leaves bar 
+      .on('mouseout', function(d, i) {
+        d3.select(this)
+        .transition()
+          .duration('125')
+          .attr('opacity', '1');
+        d3.selectAll('#tooltip').remove();
+      });
+
+     
   svg.append("g")
       .call(xAxis);
 
@@ -152,42 +181,13 @@ function makeGraph(day) {
   return svg.node();
 }
 
-// runs when the mouse is over a bar
-function onMouseOver(d, i) {
-  d3.select(this).transition()
-    .duration('50')
-    .attr('opacity', '.70'); 
-
-  let mouse_text = svg.append("text")
-    .attr('class', 'val') 
-    .attr('x', function() {
-      return x(d.position);
-    })
-    .attr('y', function() {
-      return y(d.frequency) - 15;
-    })
-    .text(function() {
-      return [ '$' +d.frequency];  // Value of the text
-    });
-}
-
-// runs when the mouse leaves a bar 
-function onMouseOut(d, i) {
-  d3.select(this).transition()
-    .duration('50')
-    .attr('opacity', '1');
-
-  d3.selectAll('.val')
-    .remove()
-}
-
 // assignments for making graph 
-let color = "#4E8BE5";
+let color = "#C14DC8";
 
 let graph_text = "Whole Week";
 
-let width = 500; 
+let width = 600; 
 
 let height = 600; 
 
-let margin = ({top: 30, right: 0, bottom: 100, left: 40});
+let margin = ({top: 30, right: 100, bottom: 100, left: 40});
