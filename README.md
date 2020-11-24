@@ -1,5 +1,5 @@
 Team Members:\
-Brian Cao blcao@ucsc.edu
+Brian Cao blcao@ucsc.edu\
 Jesse Park\
 Michelle Lytle mnlytle@ucsc.edu
 
