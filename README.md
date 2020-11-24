@@ -1,6 +1,6 @@
 Team Members:\
 Brian Cao blcao@ucsc.edu\
-Jesse Park\
+Jesse Park jesapark@ucsc.edu\
 Michelle Lytle mnlytle@ucsc.edu
 
 Our sketch is based on the sortable bar chart example from D3.\
