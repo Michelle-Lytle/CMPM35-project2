@@ -128,9 +128,9 @@ function makeGraph(day) {
       .attr("y", d => y(d.frequency))
       .attr("width", x.bandwidth())
       .attr("height", d => y(0) - y(d.frequency))
-
+      // bars can be interacted with through the mouse
       .on('mouseover', onMouseOver)
-     .on('mouseout', onMouseOut);
+      .on('mouseout', onMouseOut);
 
   svg.append("g")
       .call(xAxis);
@@ -139,29 +139,46 @@ function makeGraph(day) {
       .call(yAxis);
 
   // graph label 
-  const title = svg.append("text")
-  .attr("x", 260)
-  .attr("y", 550)
-  .attr("text-anchor","middle")
-  .attr("font-family", "sans-serif")
-  .attr("font-size", "18px")
-  .attr("fill", "black")
-  .text(graph_text);
+  let label_text = svg.append("text")
+    .attr("x", 260)
+    .attr("y", 550)
+    .attr("text-anchor","middle")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "18px")
+    .attr("fill", "black")
+    .text(graph_text);
     
 
   return svg.node();
 }
 
+// runs when the mouse is over a bar
 function onMouseOver(d, i) {
-         d3.select(this).transition()
-               .duration('50')
-               .attr('opacity', '.85')
+  d3.select(this).transition()
+    .duration('50')
+    .attr('opacity', '.70'); 
+
+  let mouse_text = svg.append("text")
+    .attr('class', 'val') 
+    .attr('x', function() {
+      return x(d.position);
+    })
+    .attr('y', function() {
+      return y(d.frequency) - 15;
+    })
+    .text(function() {
+      return [ '$' +d.frequency];  // Value of the text
+    });
 }
 
+// runs when the mouse leaves a bar 
 function onMouseOut(d, i) {
-            d3.select(this).transition()
-               .duration('50')
-               .attr('opacity', '1');
+  d3.select(this).transition()
+    .duration('50')
+    .attr('opacity', '1');
+
+  d3.selectAll('.val')
+    .remove()
 }
 
 // assignments for making graph 
